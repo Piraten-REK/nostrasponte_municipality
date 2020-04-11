@@ -5,7 +5,7 @@
  */
 
 /**
- * Init function
+ * Init function that registers the `municipality` taxanomy
  * @since 1.0.0
  */
 function nsm_init() {
@@ -25,8 +25,7 @@ function nsm_init() {
 		'no_terms'                   => __( 'Keine Kommunen', 'nostrasponte_municipality' ),
 		'back_to_items'              => __( '&larr; Zurück zu den Kommunen', 'nostrasponte_municipality' )
 	];
-	$object_type = post_type_exists('events') ? ['post', 'events'] : 'post';
-	register_taxonomy('municipality', $object_type, [
+	register_taxonomy('municipality', 'post', [
 		'labels' => $labels,
 		'description' => __('Kommunen welche Posts und Events zugeordnet werden können', 'nostrasponte_municipality'),
 		'hierarchical' => true,

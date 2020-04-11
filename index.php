@@ -7,7 +7,7 @@
  * @author Mike Kühnapfel <mailto:mike.kuehnapfel@piraten-rek.de>
  * @copyright 2020 Mike Kühnapfel
  * @license GPL-3.0-or-later
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @wordpress-plugin
  * Plugin Name: Kommunen
@@ -30,7 +30,9 @@ if (!function_exists('add_action')) {
 // Includes
 include('includes/activate.php');
 include('includes/init.php');
+include('includes/admin/init.php');
 
 // Hooks
 register_activation_hook(__FILE__, 'nsm_activate_plugin');
 add_action('init', 'nsm_init', 0);
+add_action('admin_init', 'nsm_admin_init');
