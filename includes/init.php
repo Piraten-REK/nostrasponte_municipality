@@ -29,7 +29,8 @@ function nsm_init() {
 		'labels' => $labels,
 		'description' => __('Kommunen welche Posts und Events zugeordnet werden können', 'nostrasponte_municipality'),
 		'hierarchical' => true,
-		'rewrite' => ['slug' => 'kommune']
+		'rewrite' => ['slug' => 'kommune'],
+		'show_in_rest' => true
 	]);
 	flush_rewrite_rules();
 }

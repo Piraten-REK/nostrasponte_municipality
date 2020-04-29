@@ -7,13 +7,13 @@
  * @author Mike Kühnapfel <mailto:mike.kuehnapfel@piraten-rek.de>
  * @copyright 2020 Mike Kühnapfel
  * @license GPL-3.0-or-later
- * @version 1.1.1
+ * @version 1.1.2
  *
  * @wordpress-plugin
  * Plugin Name: Kommunen
  * Plugin URI: https://github.com/veyxos/nostrasponte-municipality
  * Description: Fügt die Taxanomy &bdquo;Kommunen&ldquo; (municipality) zu Posts hinzu
- * Version: 1.1.1
+ * Version: 1.1.2
  * Requires at least: 5.0
  * Requires PHP: 7.2
  * Author: Mike Kühnapfel
