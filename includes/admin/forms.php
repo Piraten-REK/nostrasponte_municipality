@@ -10,6 +10,14 @@ function nsm_add_form_fields_new(string $taxonomy) {
 		<label for="nsm__long-name"><?php esc_html_e('Langer Name', 'nostrasponte_municipality'); ?></label>
 		<input type="text" id="nsm__long-name" name="nsm__long-name" value="" placeholder="<?php echo esc_attr_x('z.B. &bdquo;Ortsgruppe Kerpen&ldquo;', 'Long Name example', 'nostrasponte_municipality'); ?>">
 	</div>
+    <div class="form-field term-group nsm__bg-image__wrapper">
+        <label for="nsm__bg-image__btn"><?php esc_html_e('Hintergrundbild', 'nostrasponte_municipality') ?></label>
+        <div class="image-preview-wrapper">
+            <img src="" width="100" height="100" style="max-height: 100px; width: 100px;" id="nsm__bg-image__img">
+        </div>
+        <input type="button" id="nsm__bg-image__btn" class="button" value="<?php esc_attr_e('Bild hochladen', 'nostrasponte_municipality'); ?>">
+        <input type="hidden" id="nsm__bg-image" name="nsm__bg-image" value="">
+    </div>
 	<details class="form-field term-group nsm__partners__wrapper" style="background: rgba(0,0,0,.1);padding:.4em;">
         <summary>
             <h4 id="nsm__partners__title"><?php esc_html_e('Anprechpartner', 'nostrasponte_municipality'); ?></h4>
@@ -52,6 +60,18 @@ function nsm_add_form_fields_edit(WP_Term $term, string $taxonomy) {
                 </th>
                 <td>
                     <input type="text" id="nsm__long-name" name="nsm__long-name" value="<?php echo esc_attr($data['long_title']); ?>" placeholder="<?php echo esc_attr_x('z.B. &bdquo;Ortsgruppe Kerpen&ldquo;', 'Long Name example', 'nostrasponte_municipality'); ?>">
+                </td>
+            </tr>
+            <tr class="form-field term-group nsm__bg-image__wrapper">
+                <th class="row">
+                    <label for="nsm__bg-image__btn"><?php esc_html_e('Hintergrundbild', 'nostrasponte_municipality') ?></label>
+                </th>
+                <td>
+                    <div class="image-preview-wrapper">
+                        <img src="" width="100" height="100" style="max-height: 100px; width: 100px;" id="nsm__bg-image__img">
+                    </div>
+                    <input type="button" id="nsm__bg-image__btn" class="button" value="<?php esc_attr_e('Bild hochladen', 'nostrasponte_municipality'); ?>">
+                    <input type="hidden" id="nsm__bg-image" name="nsm__bg-image" value="">
                 </td>
             </tr>
             <tr class="form-field term-group nsm__partners__wrapper">
@@ -107,9 +127,9 @@ function nsm_javascript() {
             const wp_media_post_id = wp.media.model.settings.post.id; // Store the old id
             const set_to_post_id = <?php echo $my_saved_attachment_post_id; ?>; // Set this
 
-            for (let i = 1; i <= 5; i++) {
+            function mediaModal (identifier) {
                 let file_frame;
-                jQuery(`#nsm__partner--${i}__avatar__btn`).on('click', function( event ){
+                jQuery(`${identifier}__btn`).on('click', function( event ){
 
                     event.preventDefault();
 
@@ -140,8 +160,8 @@ function nsm_javascript() {
                         attachment = file_frame.state().get('selection').first().toJSON();
 
                         // Do something with attachment.id and/or attachment.url here
-                        $( `#nsm__partner--${i}__avatar__img` ).attr( 'src', attachment.url ).css( 'width', 'auto' );
-                        $( `#nsm__partner--${i}__avatar` ).val( attachment.id );
+                        $( `${identifier}__img` ).attr( 'src', attachment.url ).css( 'width', 'auto' );
+                        $( identifier ).val( attachment.id );
 
                         // Restore the main post ID
                         wp.media.model.settings.post.id = wp_media_post_id;
@@ -156,6 +176,11 @@ function nsm_javascript() {
                     wp.media.model.settings.post.id = wp_media_post_id;
                 });
             }
+
+            for (let i = 1; i <= 5; i++) mediaModal(`#nsm__partner--${i}__avatar`)
+
+            mediaModal('#nsm__bg-image')
+
         });
     </script><?php
 }
