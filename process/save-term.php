@@ -10,9 +10,14 @@ function nsm_save_term_admin (int $term_id, int $tt_id, bool $update) {
 	$term_data = empty($term_data) ? [] : $term_data;
 	$term_data['long_title'] = isset($term_data['long_title']) ? $term_data['long_title'] : $term->name;
 	$term_data['partners'] = isset($term_data['partners']) ? $term_data['partners'] : [];
+	$term_data['bg-image'] = isset($term_data['bg-image']) ? $term_data['bg-image'] : null;
 
 	if (isset($_POST['nsm__long-name']) && !empty($_POST['nsm__long-name'])) {
 		$term_data['long_title'] = sanitize_text_field($_POST['nsm__long-name']);
+	}
+
+	if (isset($_POST['nsm__bg-image']) && !empty($_POST['nsm__bg-image'])) {
+		$term_data['bg-image'] = sanitize_text_field($_POST['nsm__bg-image']);
 	}
 
 	$partners = [];

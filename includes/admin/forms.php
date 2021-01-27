@@ -68,10 +68,10 @@ function nsm_add_form_fields_edit(WP_Term $term, string $taxonomy) {
                 </th>
                 <td>
                     <div class="image-preview-wrapper">
-                        <img src="" width="100" height="100" style="max-height: 100px; width: 100px;" id="nsm__bg-image__img">
+                        <img src="<?php echo esc_attr(isset($data['bg-image']) ? wp_get_attachment_url($data['bg-image']) : ''); ?>" width="100" height="100" style="max-height: 100px; width: <?php echo esc_attr(isset($data['bg-image']) ? 'auto' : '100px'); ?>;" id="nsm__bg-image__img">
                     </div>
                     <input type="button" id="nsm__bg-image__btn" class="button" value="<?php esc_attr_e('Bild hochladen', 'nostrasponte_municipality'); ?>">
-                    <input type="hidden" id="nsm__bg-image" name="nsm__bg-image" value="">
+                    <input type="hidden" id="nsm__bg-image" name="nsm__bg-image" value="<?php echo esc_attr($data['bg-image']); ?>">
                 </td>
             </tr>
             <tr class="form-field term-group nsm__partners__wrapper">
@@ -157,7 +157,7 @@ function nsm_javascript() {
                     // When an image is selected, run a callback.
                     file_frame.on( 'select', function() {
                         // We set multiple to false so only get one image from the uploader
-                        attachment = file_frame.state().get('selection').first().toJSON();
+                        const attachment = file_frame.state().get('selection').first().toJSON();
 
                         // Do something with attachment.id and/or attachment.url here
                         $( `${identifier}__img` ).attr( 'src', attachment.url ).css( 'width', 'auto' );
