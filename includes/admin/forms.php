@@ -23,7 +23,7 @@ function nsm_add_form_fields_new(string $taxonomy) {
             <h4 id="nsm__partners__title"><?php esc_html_e('Anprechpartner', 'nostrasponte_municipality'); ?></h4>
             <p><?php esc_html_e('Hier kannst du bis zu fünf Ansprechpartner für die Kommune anlegen.', 'nostrasponte_municipality'); ?></p>
         </summary>
-		<?php for ($i = 1; $i <=5; $i++) { ?>
+		<?php for ($i = 1; $i <=4; $i++) { ?>
 			<h5 id="nsm__partner--<?php echo $i; ?>__title"><?php printf(esc_html_x('Ansprechpartner Nummer %d', 'Countable label for municipality partners', 'nostrasponte_municipality'), $i); ?></h5>
 			<label for="nsm__partner--<?php echo $i; ?>__name"><?php echo esc_html_x('Name', 'Name of municipality partner', 'nostrasponte_municipality'); ?></label>
 			<input type="text" id="nsm__partner--<?php echo $i; ?>__name" name="nsm__partner--<?php echo $i; ?>__name">
@@ -83,7 +83,7 @@ function nsm_add_form_fields_edit(WP_Term $term, string $taxonomy) {
 		                if ($html) return esc_html($test);
 		                return isset($test) ? esc_attr($test) : '';
 	                }
-                    for ($i = 1; $i <=5; $i++) {
+                    for ($i = 1; $i <=4; $i++) {
 	                    $partner = $data['partners'][$i - 1];
                         ?>
                         <article class="nsm__partner--<?php echo $i; ?>" style="background: #fff; padding: 10px; display: flex; flex-direction: column;<?php if ($i < 5) { ?> margin-bottom: 14px;<?php } ?>">
